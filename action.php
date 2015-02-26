@@ -2,7 +2,7 @@
 
 $fdset = array('a', 'b', 'c', 'd', 'e');
 
-$gfile = 'config.ini';
+$gfile = 'movieup.ini';
 $fp = fopen($gfile,'w');
 
 

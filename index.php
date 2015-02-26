@@ -1,6 +1,6 @@
 <?php
 
-$gfile = 'config.ini';
+$gfile = 'movieup.ini';
 $myfile = fopen($gfile, "r") or die("Unable to open file!");
 
 //$data = fread($myfile,filesize("config.ini"));
@@ -12,20 +12,27 @@ $myfile = fopen($gfile, "r") or die("Unable to open file!");
 	<body>
 
 		<form action="action.php" method="get">
-			<table style="width:100%">
+			<table>
 				<?php while(!feof($myfile)):
 					
 					$row = fgets($myfile);
 					$n = strpos($row, '=');
+                    
+                    $s = strpos($row, ';');
 					
-					if(!$n) continue;
-					$key = substr($row, 0, $n);
-					$value = substr($row, $n + 1);
-				
+                    if($n){
+                        $key = substr($row, 0, $n);
+                        $value = substr($row, $n + 1);
+                    }else{
+                        $key = $row;
+                    }
+					
 				?>
 					<tr>
 						<td><?php echo $key ?></td>
-						<td><input type="text" name="<?php echo $key ?>" value="<?php echo $value ?>"></td>
+                        <?php if($n):?>
+<td><input type="text" name="<?php echo $key ?>" value="<?php echo $value ?>" <?php if($s===0):?> disabled <?php endif?> ></td>
+                        <?php endif?>
 					</tr>
 				<?php endwhile ?>
 			</table>
