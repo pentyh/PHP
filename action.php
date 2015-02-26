@@ -1,17 +1,19 @@
 <?php
 
-$fdset = array('1', '2', '3', '4', '5');
+$fdset = array('a', 'b', 'c', 'd', 'e');
 
 $gfile = 'config.ini';
 $fp = fopen($gfile,'w');
 
+
 foreach ($fdset as $val)
 {
-	fwrite($fp, $val."=".trim(${$val})."\n");
+	
+	fwrite($fp, $val."=".trim($_REQUEST[$val])."\n");
 }
 
 fclose($fp);
 @chmod($gfile,0707);
 
-
+echo '<script>alert("success"); location.href("index.php");</script>';
 ?>

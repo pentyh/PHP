@@ -14,12 +14,14 @@ $myfile = fopen($gfile, "r") or die("Unable to open file!");
 		<form action="action.php" method="get">
 			<table style="width:100%">
 				<?php while(!feof($myfile)):
-				?>
-				<?php
-				$row = fgets($myfile);
-				$n = strpos($row, '=');
-				$key = substr($row, 0, $n);
-				$value = substr($row, $n + 1);
+					
+					$row = fgets($myfile);
+					$n = strpos($row, '=');
+					
+					if(!$n) continue;
+					$key = substr($row, 0, $n);
+					$value = substr($row, $n + 1);
+				
 				?>
 					<tr>
 						<td><?php echo $key ?></td>
