@@ -16,12 +16,12 @@ $hide = FALSE;
 
         <title>환경설정</title>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.css">
+		<link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap-theme.min.css">
 
-        <script src="http://code.jquery.com/jquery-latest.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <script src="jquery-2.1.3.min.js"></script>
+		<script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 		
 	</head>
 	<body style="padding: 0 10%">
