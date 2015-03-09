@@ -57,6 +57,8 @@ foreach ($fdset as $val)
 
 fclose($fp);
 @chmod($gfile,0707);
+    
+    system("am start --user 0 -n com.jrl.jrltest/com.jrl.jrltest.MainActivity");
 
-echo '<script>alert("success"); history.back(-1);</script>';
+    echo '<script>alert("success"); history.back(-1);</script>';
 ?>
