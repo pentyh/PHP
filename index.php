@@ -2,7 +2,7 @@
     empty($_REQUEST['type']) && $_REQUEST['type'] = 'all';
     $type = $_REQUEST['type'];// ? $_REQUEST['type'] : 'all';
 
-$gfile = 'movieup.ini';
+$gfile = '../../movieup.ini';
 $myfile = fopen($gfile, "r") or die("Unable to open file!");
 
 $hide = FALSE;
@@ -104,7 +104,8 @@ $hide = FALSE;
 				<label class="col-sm-3 control-label"><?php echo $key ?></label>
 				<?php if($n):?>
 					<div class="col-sm-9">
-						<div class="input-group">
+<input type="text" class="form-control input-info" name="<?php echo $key ?>" value="<?php echo $value ?>" <?php if($s===0):?> readonly <?php endif ?> >
+						<div class="input-group hide">
 							<input type="text" class="form-control input-info" name="<?php echo $key ?>" value="<?php echo $value ?>" <?php if($s===0):?> readonly <?php endif ?> >
 							<span class="input-group-addon">asdf</span>
 						</div>

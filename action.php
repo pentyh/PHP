@@ -1,5 +1,5 @@
 <?php
-    $gfile = 'movieup.ini';
+    $gfile = '../../movieup.ini';
 
     $fdset = array();
     
@@ -58,7 +58,8 @@ foreach ($fdset as $val)
 fclose($fp);
 @chmod($gfile,0707);
     
-    system("am start --user 0 -n com.jrl.jrltest/com.jrl.jrltest.MainActivity");
+    //system("am start --user 0 -n com.jrl.jrltest/com.jrl.jrltest.MainActivity");
+    system("/data/h2cmd key=1");
 
     echo '<script>alert("success"); history.back(-1);</script>';
 ?>
