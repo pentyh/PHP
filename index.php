@@ -100,15 +100,15 @@ $hide = FALSE;
 			?>
 
 			
-			<div class="form-group <?php if($hide || $s===0):?> hide <?php endif?>">
+			<div class="form-group <?php if($hide || ( $s===0 && $row != $type)):?> hide <?php endif?>">
 				<label class="col-sm-3 control-label"><?php echo $key ?></label>
 				<?php if($n):?>
 					<div class="col-sm-9">
-<input type="text" class="form-control input-info" name="<?php echo $key ?>" value="<?php echo $value ?>" <?php if($s===0):?> readonly <?php endif ?> >
-						<div class="input-group hide">
+						<input type="text" class="form-control input-info" name="<?php echo $key ?>" value="<?php echo $value ?>" <?php if($s===0):?> readonly <?php endif ?> >
+						<!-- <div class="input-group">
 							<input type="text" class="form-control input-info" name="<?php echo $key ?>" value="<?php echo $value ?>" <?php if($s===0):?> readonly <?php endif ?> >
 							<span class="input-group-addon">asdf</span>
-						</div>
+						</div> -->
 					</div>
 				<?php endif ?>
 			</div>
