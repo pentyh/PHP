@@ -54,7 +54,7 @@ foreach ($fdset as $val) {
 fclose($fp);
 @chmod($gfile, 0707);
 
-$cfile = 'line.txt';
+$cfile = 'command.ini';
 $fp = fopen($cfile, "r");
 if ($fp) {
 	$line = trim(fgets($fp));
