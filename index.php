@@ -1,14 +1,18 @@
 <?php
-    
+
     header("Content-type:text/html;charset=utf-8");
     define('__ENJ__',true);
     error_reporting(E_ALL ^ E_NOTICE);
-   
-
+    
+    session_save_path('./tmp/session');
+    session_start();
     
     include 'var/var.php';
     
+    $a = !empty($_REQUEST['a']) ? $_REQUEST['a'] : 0;
+    if ($a) require 'action/a.'.$a.'.php';
     
+    $mod = !empty($_REQUEST['mod']) ? $_REQUEST['mod'] : 'main';
 ?>
 
 <!DOCTYPE HTML>
@@ -29,12 +33,15 @@
 	</head>
 	<body style="padding: 0 10%">
 
-    <div >
-<input type="text" class="form-control input-info" >
-<input type="button" class="btn btn-primary" value="Login"/>
 
-
-    </div>
+        <?php
+            
+            if($_SESSION["pw"] != $PASSWORD){
+                $mod = 'login';
+            }
+            
+            include $mod.'.php';
+        ?>
 
 	</body>
 </html>

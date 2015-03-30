@@ -40,32 +40,32 @@ $hide = FALSE;
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="main.php">전체</a>
+					<a class="navbar-brand" href="./?mod=main">전체</a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
 						<li <?php if($type == '[boot]'):?>class="active"<?php endif ?> >
-							<a href="main.php?type=[boot]">[boot]</a>
+							<a href="./?mod=main&type=[boot]">[boot]</a>
 						</li>
 						<li <?php if($type == '[server]'):?>class="active"<?php endif ?> >
-							<a href="main.php?type=[server]">[server]</a>
+							<a href="./?mod=main&type=[server]">[server]</a>
 						</li>
 						<li <?php if($type == '[quality]'):?>class="active"<?php endif ?> >
-							<a href="main.php?type=[quality]">[quality]</a>
+							<a href="./?mod=main&type=[quality]">[quality]</a>
 						</li>
 						<li <?php if($type == '[image]'):?>class="active"<?php endif ?> >
-							<a href="main.php?type=[image]">[image]</a>
+							<a href="./?mod=main&type=[image]">[image]</a>
 						</li>
 						<li <?php if($type == '[menu]'):?>class="active"<?php endif ?> >
-							<a href="main.php?type=[menu]">[menu]</a>
+							<a href="./?mod=main&type=[menu]">[menu]</a>
 						</li>
 						<li <?php if($type == '[video]'):?>class="active"<?php endif ?> >
-							<a href="main.php?type=[video]">[video]</a>
+							<a href="./?mod=main&type=[video]">[video]</a>
 						</li>
                         <li <?php if($type == ';[video]'):?>class="active"<?php endif ?> >
-                            <a href="main.php?type=;[video]">;[video]</a>
+                            <a href="./?mod=main&type=;[video]">;[video]</a>
                         </li>
 					</ul>
 				</div><!-- /.navbar-collapse -->
