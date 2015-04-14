@@ -3,20 +3,19 @@
 if (!defined('__ENJ__'))
 	exit ;
 
-include 'var/finalvar.php';
-
 empty($_REQUEST['type']) && $_REQUEST['type'] = 'all';
 $type = $_REQUEST['type'];
 // ? $_REQUEST['type'] : 'all';
 
-$gfile = $path['con'];
+//$gfile = $path['ini'];
+$gfile = $d['action']['path'];
 $myfile = fopen($gfile, "r") or die("Unable to open file!");
 
 $hide = FALSE;
 ?>
 
 
-		<header class="navbar">
+		<header class="navbar hide">
 			<nav class="navbar navbar-inverse navbar-fixed-top" >
 				
 				<div class="navbar-header">
@@ -56,6 +55,8 @@ $hide = FALSE;
 					</ul>
 					
 					<form class="navbar-form navbar-right" role="search">
+                        <input type="text" value="main">
+                        <input type="text" value="remotecontrol">
 			        	<button type="submit" class="btn btn-primary btn-block">리모콘</button>
 			      	</form>
 			      	

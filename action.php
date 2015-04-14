@@ -1,6 +1,8 @@
 <?php
-$gfile = '../../movieup.ini';
-
+    
+    include 'var/finalvar.php';
+//$gfile = '../../movieup.ini';
+$gfile = $d['action']['path'];
 $fdset = array();
 
 $myfile = fopen($gfile, "r") or die("Unable to open file!");
@@ -54,15 +56,19 @@ foreach ($fdset as $val) {
 fclose($fp);
 @chmod($gfile, 0707);
 
-$cfile = 'command.ini';
-$fp = fopen($cfile, "r");
-if ($fp) {
-	$line = trim(fgets($fp));
+    
+    $line = $d['action']['cmd'];
+    $result = exec($line, $out, $status);
+    
+//$cfile = 'command.ini';
+//$fp = fopen($cfile, "r");
+//if ($fp) {
+//	$line = trim(fgets($fp));
 
 	//system("am start --user 0 -n com.jrl.jrltest/com.jrl.jrltest.MainActivity");
-	system($line);
-}
-fclose($fp);
+//	system($line);
+//}
+//fclose($fp);
 
 echo '<script>alert("success"); history.back(-1);</script>';
 ?>

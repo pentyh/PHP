@@ -1,3 +1,3 @@
 <?php
-    $PASSWORD = '4725';
+    $PASSWORD = "4725";
 ?>
