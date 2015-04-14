@@ -1,5 +1,5 @@
 <?php
-    
-    $path['con'] = '../../movieup.ini';
-    $path['cmd'] = 'command.ini';
+
+$path['con'] = '../../movieup.ini';
+$path['cmd'] = 'command.ini';
 ?>

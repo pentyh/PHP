@@ -1,11 +1,13 @@
 <?php
-    
-    if(!defined('__ENJ__')) exit;
-    
-    include 'var/finalvar.php';
-    
-    empty($_REQUEST['type']) && $_REQUEST['type'] = 'all';
-    $type = $_REQUEST['type'];// ? $_REQUEST['type'] : 'all';
+
+if (!defined('__ENJ__'))
+	exit ;
+
+include 'var/finalvar.php';
+
+empty($_REQUEST['type']) && $_REQUEST['type'] = 'all';
+$type = $_REQUEST['type'];
+// ? $_REQUEST['type'] : 'all';
 
 $gfile = $path['con'];
 $myfile = fopen($gfile, "r") or die("Unable to open file!");
@@ -13,26 +15,10 @@ $myfile = fopen($gfile, "r") or die("Unable to open file!");
 $hide = FALSE;
 ?>
 
-<!DOCTYPE HTML>
-<html>
-	<head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
-
-        <title>환경설정</title>
-
-        <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.css">
-		<link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
-		<link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap-theme.min.css">
-
-        <script src="jquery-2.1.3.min.js"></script>
-		<script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
-		
-	</head>
-	<body style="padding: 0 10%">
 
 		<header class="navbar">
 			<nav class="navbar navbar-inverse navbar-fixed-top" >
+				
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
 						<span class="sr-only">Toggle navigation</span>
@@ -68,6 +54,11 @@ $hide = FALSE;
                             <a href="./?mod=main&type=;[video]">;[video]</a>
                         </li>
 					</ul>
+					
+					<form class="navbar-form navbar-right" role="search">
+			        	<button type="submit" class="btn btn-primary btn-block">리모콘</button>
+			      	</form>
+			      	
 				</div><!-- /.navbar-collapse -->
 			</nav>
 		</header>
@@ -105,7 +96,7 @@ $hide = FALSE;
 			?>
 
 			
-			<div class="form-group <?php if($hide || ( $s===0 && $row != $type)):?> hide <?php endif?>">
+			<div class="form-group <?php if($hide || ( $s===0 && $row != $type)):?> hide <?php endif ?>">
 				<label class="col-sm-3 control-label"><?php echo $key ?></label>
 				<?php if($n):?>
 					<div class="col-sm-9">
@@ -138,7 +129,5 @@ $hide = FALSE;
 
 		</form>
 
-	</body>
-</html>
 
 <?php fclose($myfile); ?>
