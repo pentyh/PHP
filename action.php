@@ -1,10 +1,13 @@
 <?php
     
     include 'var/finalvar.php';
-//$gfile = '../../movieup.ini';
-$gfile = $d['action']['path'];
-$fdset = array();
 
+$gfile = $d['action']['path'];
+$old = $d['action']['old'];
+
+copy($gfile, $old);
+
+$fdset = array();
 $myfile = fopen($gfile, "r") or die("Unable to open file!");
 
 while (!feof($myfile)) {

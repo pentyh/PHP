@@ -3,66 +3,49 @@
 if (!defined('__ENJ__'))
 	exit ;
 
-empty($_REQUEST['type']) && $_REQUEST['type'] = 'all';
-$type = $_REQUEST['type'];
-// ? $_REQUEST['type'] : 'all';
-
-//$gfile = $path['ini'];
 $gfile = $d['action']['path'];
+$old = $d['action']['old'];
+
+if(!file_exists($gfile)){
+
+	echo "<script> alert('설정 파일이 존재하지 않습니다, 백업파일을 로딩하시겠습니까?'); </script>";
+	
+	if(!file_exists($old)){
+	
+		echo "<script> alert('백업 파일이 존재하지 않습니다.'); </script>";
+		exit ;
+	}else if(filesize($old) == 0){
+		
+		echo "<script> alert('백업 파일에 데이타(0byte)가 없습니다.'); </script>";
+		exit ;
+	}else{
+		
+		copy($old, $gfile);
+	}
+	
+}else if(filesize($gfile) == 0){
+
+	echo "<script> alert('설정 파일에 데이타(0byte)가 없습니다, 백업파일을 로딩하시겠습니까?'); </script>";
+	
+	if(!file_exists($old)){
+	
+		echo "<script> alert('백업 파일이 존재하지 않습니다.'); </script>";
+		exit ;
+	}else if(filesize($old) == 0){
+		
+		echo "<script> alert('백업 파일에 데이타(0byte)가 없습니다.'); </script>";
+		exit ;
+	}else{
+		
+		copy($old, $gfile);
+	}
+
+}
+
 $myfile = fopen($gfile, "r") or die("Unable to open file!");
 
 $hide = FALSE;
 ?>
-
-
-		<header class="navbar hide">
-			<nav class="navbar navbar-inverse navbar-fixed-top" >
-				
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="./?mod=main">전체</a>
-				</div>
-
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse">
-					<ul class="nav navbar-nav">
-						<li <?php if($type == '[boot]'):?>class="active"<?php endif ?> >
-							<a href="./?mod=main&type=[boot]">[boot]</a>
-						</li>
-						<li <?php if($type == '[server]'):?>class="active"<?php endif ?> >
-							<a href="./?mod=main&type=[server]">[server]</a>
-						</li>
-						<li <?php if($type == '[quality]'):?>class="active"<?php endif ?> >
-							<a href="./?mod=main&type=[quality]">[quality]</a>
-						</li>
-						<li <?php if($type == '[image]'):?>class="active"<?php endif ?> >
-							<a href="./?mod=main&type=[image]">[image]</a>
-						</li>
-						<li <?php if($type == '[menu]'):?>class="active"<?php endif ?> >
-							<a href="./?mod=main&type=[menu]">[menu]</a>
-						</li>
-						<li <?php if($type == '[video]'):?>class="active"<?php endif ?> >
-							<a href="./?mod=main&type=[video]">[video]</a>
-						</li>
-                        <li <?php if($type == ';[video]'):?>class="active"<?php endif ?> >
-                            <a href="./?mod=main&type=;[video]">;[video]</a>
-                        </li>
-					</ul>
-					
-					<form class="navbar-form navbar-right" role="search">
-                        <input type="text" value="main">
-                        <input type="text" value="remotecontrol">
-			        	<button type="submit" class="btn btn-primary btn-block">리모콘</button>
-			      	</form>
-			      	
-				</div><!-- /.navbar-collapse -->
-			</nav>
-		</header>
 
 		<form class="form-horizontal" action="action.php" method="post">
 
@@ -70,20 +53,21 @@ $hide = FALSE;
 
 				$row = trim(fgets($myfile));
 				$t = strpos($row, ']');
+				$n = strpos($row, '=');
+				$s = strpos($row, ';');
 				
 				if($type && $row == $type){
 					
 					$hide = FALSE;
-				}else if($t){
+				}else if($t && $s !== 0){
+				
 					$hide = TRUE;
 				}
 				
-				if($type=='all') $hide = FALSE;
-				
-				$n = strpos($row, '=');
-				$s = strpos($row, ';');
+				if(!$type) $hide = FALSE;
 	
 				if($n){
+				
                     if($s===0){
                         $key = substr($row, 1, $n-1);
                     }else{
@@ -91,6 +75,7 @@ $hide = FALSE;
                     }
 					$value = substr($row, $n + 1);
 				}else{
+				
 					$key = $row;
 				}
 
@@ -111,15 +96,6 @@ $hide = FALSE;
 			</div>
 
 			<?php endwhile ?>
-
-			<div class="form-group hide">
-				<div class="col-xs-6">
-					<input type="submit" class="btn btn-primary btn-block" value="SAVE"/>
-				</div>
-				<div class="col-xs-6">
-					<input type="reset" class="btn btn-primary btn-block" value="RESET"/>
-				</div>
-			</div>
 
             <div class="form-group">
                 <div class="btn-group col-xs-12">
