@@ -3,19 +3,19 @@
     header("Content-type:text/html;charset=utf-8");
     define('__ENJ__',true);
     error_reporting(E_ALL ^ E_NOTICE);
-    
-    session_save_path('./tmp/session');
+
     session_start();
     
     include 'var/var.php';
     include 'var/buttonvar.php';
     include 'var/finalvar.php';
     
+    $mod = $_REQUEST['mod'] ? $_REQUEST['mod'] : 'main';
+    $type = $_REQUEST['type'];
+    
     $a = $_REQUEST['a'];
     if ($a) require 'action/a.'.$a.'.php';
     
-    $mod = $_REQUEST['mod'] ? $_REQUEST['mod'] : 'main';
-    $type = $_REQUEST['type'];
 ?>
 
 <!DOCTYPE HTML>
@@ -34,9 +34,9 @@
 		<script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 		
 	</head>
-	<body style="padding: 0 10%">
+	<body style="padding: 70px 10%">
 
-<header class="navbar">
+
 <nav class="navbar navbar-inverse navbar-fixed-top" >
 
 <div class="container-fluid">
@@ -54,23 +54,23 @@
 <!-- Collect the nav links, forms, and other content for toggling -->
 <div class="collapse navbar-collapse">
 <ul class="nav navbar-nav">
-<li <?php if($type == '[boot]'):?>class="active"<?php endif ?> >
-<a href="./?mod=main&type=[boot]">부트</a>
+<li <?php if($type == 'boot'):?>class="active"<?php endif ?> >
+<a href="./?mod=main&type=boot">부트</a>
 </li>
-<li <?php if($type == '[server]'):?>class="active"<?php endif ?> >
-<a href="./?mod=main&type=[server]">서버</a>
+<li <?php if($type == 'server'):?>class="active"<?php endif ?> >
+<a href="./?mod=main&type=server">서버</a>
 </li>
-<li <?php if($type == '[quality]'):?>class="active"<?php endif ?> >
-<a href="./?mod=main&type=[quality]">쿼리티</a>
+<li <?php if($type == 'quality'):?>class="active"<?php endif ?> >
+<a href="./?mod=main&type=quality">쿼리티</a>
 </li>
-<li <?php if($type == '[image]'):?>class="active"<?php endif ?> >
-<a href="./?mod=main&type=[image]">이미지</a>
+<li <?php if($type == 'image'):?>class="active"<?php endif ?> >
+<a href="./?mod=main&type=image">이미지</a>
 </li>
-<li <?php if($type == '[menu]'):?>class="active"<?php endif ?> >
-<a href="./?mod=main&type=[menu]">메뉴</a>
+<li <?php if($type == 'menu'):?>class="active"<?php endif ?> >
+<a href="./?mod=main&type=menu">메뉴</a>
 </li>
-<li <?php if($type == '[video]'):?>class="active"<?php endif ?> >
-<a href="./?mod=main&type=[video]">비디오</a>
+<li <?php if($type == 'video'):?>class="active"<?php endif ?> >
+<a href="./?mod=main&type=video">비디오</a>
 </li>
 </ul>
 
@@ -83,8 +83,6 @@
 </div>
 
 </nav>
-</header>
-
 
         <?php
             

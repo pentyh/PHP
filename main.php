@@ -42,69 +42,36 @@ if(!file_exists($gfile)){
 
 }
 
-$myfile = fopen($gfile, "r") or die("Unable to open file!");
+$list = parse_ini_file($gfile, true);
 
-$hide = FALSE;
 ?>
 
-		<form class="form-horizontal" action="action.php" method="post">
-
-			<?php while(!feof($myfile)):
-
-				$row = trim(fgets($myfile));
-				$t = strpos($row, ']');
-				$n = strpos($row, '=');
-				$s = strpos($row, ';');
-				
-				if($type && $row == $type){
-					
-					$hide = FALSE;
-				}else if($t && $s !== 0){
-				
-					$hide = TRUE;
-				}
-				
-				if(!$type) $hide = FALSE;
+<form class="form-horizontal" action="action.php" method="post">
+	<input type="hidden" name="mod" value="main">
+	<input type="hidden" name="type" value="<?php echo $type ?>">
 	
-				if($n){
-				
-                    if($s===0){
-                        $key = substr($row, 1, $n-1);
-                    }else{
-                        $key = substr($row, 0, $n);
-                    }
-					$value = substr($row, $n + 1);
-				}else{
-				
-					$key = $row;
-				}
-
-			?>
-
-			
-			<div class="form-group <?php if($hide || ( $s===0 && $row != $type)):?> hide <?php endif ?>">
-				<label class="col-sm-3 control-label"><?php echo $key ?></label>
-				<?php if($n):?>
-					<div class="col-sm-9">
-						<input type="text" class="form-control input-info" name="<?php echo $key ?>" value="<?php echo $value ?>" <?php if($s===0):?> readonly <?php endif ?> >
-						<!-- <div class="input-group">
-							<input type="text" class="form-control input-info" name="<?php echo $key ?>" value="<?php echo $value ?>" <?php if($s===0):?> readonly <?php endif ?> >
-							<span class="input-group-addon">asdf</span>
-						</div> -->
-					</div>
-				<?php endif ?>
+	<?php foreach ($list as $key => $value): ?>
+		
+		<div class="form-group <?php if($type && $key != $type):?> hide <?php endif;?>">
+			<label class="col-sm-3 control-label input-lg "><?php echo $key ?></label>
+			<div class="col-sm-9"></div>
+		</div>
+		
+		<?php foreach ($value as $key2 => $value2): ?>
+		
+			<div class="form-group <?php if($type && $key != $type):?> hide <?php endif;?>">
+				<label class="col-sm-3 control-label"><?php echo $key2 ?></label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control input-info" name="<?php echo $key2 ?>" value="<?php echo $value2 ?>" >
+				</div>
 			</div>
+		<?php endforeach;?>	
+	<?php endforeach;?>		
 
-			<?php endwhile ?>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+  			<div class="container-fluid">
+  				<input type="submit" class="btn btn-primary btn-block navbar-btn" value="SAVE"/>
+  			</div>
+	</nav>
 
-            <div class="form-group">
-                <div class="btn-group col-xs-12">
-                    <input type="reset" class="btn btn-primary col-xs-6" value="RESET"/>
-                    <input type="submit" class="btn btn-primary col-xs-6" value="SAVE"/>
-                </div>
-            </div>
-
-		</form>
-
-
-<?php fclose($myfile); ?>
+</form>

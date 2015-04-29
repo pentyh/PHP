@@ -1,33 +1,35 @@
 <?php
     
+    error_reporting(E_ALL ^ E_NOTICE);
+    
     include 'var/finalvar.php';
 
-$gfile = $d['action']['path'];
-$old = $d['action']['old'];
+	$gfile = $d['action']['path'];
+	$old = $d['action']['old'];
 
-copy($gfile, $old);
+	copy($gfile, $old);
 
-$fdset = array();
-$myfile = fopen($gfile, "r") or die("Unable to open file!");
+	$fdset = array();
+	$myfile = fopen($gfile, "r") or die("Unable to open file!");
 
 while (!feof($myfile)) {
 
-	$row = trim(fgets($myfile));
+	$row = fgets($myfile);
+	
 	$t = strpos($row, ']');
-
 	$n = strpos($row, '=');
 	$s = strpos($row, ';');
 
 	if ($n) {
 
 		$key = substr($row, 0, $n);
-
 	} else {
 
 		$key = $row;
 	}
 
-	$fdset[] = $key;
+	//$fdset[] = $key;
+	$fdset[] = $row;
 
 }
 
@@ -37,41 +39,39 @@ $fp = fopen($gfile, 'w');
 
 $i = 1;
 foreach ($fdset as $val) {
-	$key = $val;
+
 	$s = strpos($val, ';');
-
-	if ($s === 0)
-		$val = substr($val, 1);
-
-	$data = '';
-	if (isset($_REQUEST[$val])) {
-
-		$data = '=' . trim($_REQUEST[$val]);
+	$b = strpos($val, ']');
+	$e = strpos($val, '=');
+	
+	if ($s === 0){
+		fwrite($fp, $val);
+	}else if($b){
+		fwrite($fp, $val);
+	}else if($e){
+		
+		$key = substr($val, 0, $e);
+		$data = '=' . trim($_REQUEST[$key]);
+		fwrite($fp, $key . $data."\n");
+		
+	}else{
+		fwrite($fp, $val);
 	}
-
-	if ($i === 1) {
-		fwrite($fp, $key . $data);
-		$i++;
-	} else
-		fwrite($fp, "\n" . $key . $data);
+	
 }
 
 fclose($fp);
 @chmod($gfile, 0707);
 
-    
     $line = $d['action']['cmd'];
     $result = exec($line, $out, $status);
     
-//$cfile = 'command.ini';
-//$fp = fopen($cfile, "r");
-//if ($fp) {
-//	$line = trim(fgets($fp));
-
 	//system("am start --user 0 -n com.jrl.jrltest/com.jrl.jrltest.MainActivity");
-//	system($line);
-//}
-//fclose($fp);
+	//	system($line);
 
-echo '<script>alert("success"); history.back(-1);</script>';
+
+$type = $_REQUEST['type'];
+//echo '<script>alert("success"); history.back(-1);</script>';
+echo '<script>alert("success"); window.location.href="./?mod=main&type='.$type.'";</script>';
+
 ?>
