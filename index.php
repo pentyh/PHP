@@ -48,35 +48,35 @@
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
 </button>
-<a class="navbar-brand" href="./?mod=main">전체</a>
+<a class="navbar-brand" href="./?mod=main">All</a>
 </div>
 
 <!-- Collect the nav links, forms, and other content for toggling -->
 <div class="collapse navbar-collapse">
 <ul class="nav navbar-nav">
 <li <?php if($type == 'boot'):?>class="active"<?php endif ?> >
-<a href="./?mod=main&type=boot">부트</a>
+<a href="./?mod=main&type=boot">boot</a>
 </li>
 <li <?php if($type == 'server'):?>class="active"<?php endif ?> >
-<a href="./?mod=main&type=server">서버</a>
+<a href="./?mod=main&type=server">server</a>
 </li>
 <li <?php if($type == 'quality'):?>class="active"<?php endif ?> >
-<a href="./?mod=main&type=quality">쿼리티</a>
+<a href="./?mod=main&type=quality">quality</a>
 </li>
 <li <?php if($type == 'image'):?>class="active"<?php endif ?> >
-<a href="./?mod=main&type=image">이미지</a>
+<a href="./?mod=main&type=image">image</a>
 </li>
 <li <?php if($type == 'menu'):?>class="active"<?php endif ?> >
-<a href="./?mod=main&type=menu">메뉴</a>
+<a href="./?mod=main&type=menu">menu</a>
 </li>
 <li <?php if($type == 'video'):?>class="active"<?php endif ?> >
-<a href="./?mod=main&type=video">비디오</a>
+<a href="./?mod=main&type=video">video</a>
 </li>
 </ul>
 
 <form class="navbar-form navbar-right" role="search">
 	<input type="hidden" name="mod" value="remotecontrol">
-	<button type="submit" class="btn btn-primary btn-block"> 리모콘 </button>
+	<button type="submit" class="btn btn-primary btn-block"> RemoteControl </button>
 </form>
 
 </div><!-- /.navbar-collapse -->
@@ -84,14 +84,14 @@
 
 </nav>
 
-        <?php
+	<?php
             
-            if($_SESSION["pw"] != $PASSWORD){
-                $mod = 'login';
-            }
+		if($_SESSION["pw"] != $PASSWORD){
+            $mod = 'login';
+        }
             
-            include $mod.'.php';
-        ?>
+        include $mod.'.php';
+    ?>
 
 	</body>
 </html>
