@@ -56,7 +56,7 @@ function checked(){
     
     var result = false;
     
-    if(pw.valuw != "" && pw.value == <?php echo $PASSWORD?>){
+    if(pw.valuw != "" && pw.value == "<?php echo $PASSWORD?>"){
   
         result = true;
     }else{

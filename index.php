@@ -54,7 +54,7 @@
 <!-- Collect the nav links, forms, and other content for toggling -->
 <div class="collapse navbar-collapse">
 <ul class="nav navbar-nav">
-<li <?php if($type == 'boot'):?>class="active"<?php endif ?> >
+<li class="hide <?php if($type == 'boot'):?>active<?php endif ?>" >
 <a href="./?mod=main&type=boot">boot</a>
 </li>
 <li <?php if($type == 'server'):?>class="active"<?php endif ?> >
