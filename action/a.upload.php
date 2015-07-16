@@ -66,7 +66,7 @@
   $error = $uf['error'];  
   switch($error){  
   case 0:  
-    Echo "파일 업로드 성공"; break;  
+    Echo "File Upload Complete"; break;  
   case 1:  
     Echo "上传的文件超过了 php.ini 中 upload_max_filesize 选项限制的值."; break;  
   case 2:  

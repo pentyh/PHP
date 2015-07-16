@@ -46,20 +46,24 @@ $list = parse_ini_file($gfile, true);
 
 ?>
 
+<style type="text/css">
+.file{ position:absolute; top:0; left:0px; filter:alpha(opacity:0);opacity: 0;width:100%; height:34px;  }
+</style>
+
 <form class="form-horizontal" action="action.php" method="post">
 	<input type="hidden" name="mod" value="main">
 	<input type="hidden" name="type" value="<?php echo $type ?>">
 	
 	<?php foreach ($list as $key => $value): ?>
-		<?php if($key == 'boot') continue;?>
-		<div class="form-group <?php if($type && $key != $type):?> hide <?php endif;?>">
+		
+		<div class="form-group <?php if(($type && $key != $type) || $key == 'boot'):?> hide <?php endif;?>">
 			<label class="col-sm-3 control-label input-lg "><?php echo $key ?></label>
 			<div class="col-sm-9"></div>
 		</div>
 		
 		<?php foreach ($value as $key2 => $value2): ?>
 		
-			<div class="form-group <?php if($type && $key != $type):?> hide <?php endif;?>">
+			<div class="form-group <?php if(($type && $key != $type) || $key == 'boot'):?> hide <?php endif;?>">
 				<label class="col-sm-3 control-label"><?php echo $key2 ?></label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control input-info" name="<?php echo $key2 ?>" id="<?php echo $key2 ?>" value="<?php echo $value2 ?>" >
@@ -67,20 +71,26 @@ $list = parse_ini_file($gfile, true);
 			</div>
 			
 			<?php if(strpos($key2, '_back_image') > 0):?>
-				<div class="form-group <?php if($type && $key != $type):?> hide <?php endif;?>">
+				
+				<div class="form-group <?php if($type && $key != $type):?> hide <?php endif;?>"> 
 					<label class="col-sm-3 control-label">ImageFile(RGB)</label>
 					<div class="col-sm-9">
 						<div class="col-sm-12 input-group">
-							<input type="file" name="fileToUpload" id="fileToUpload<?php echo $key2 ?>" class="form-control input-info" onchange="fileSelected('<?php echo $key2 ?>')" >
+							
+							<span class="input-group-btn">
+								<input type="button" class="btn btn-primary" value="Select file" onclick="uploadFile('<?php echo $key2 ?>')">
+      						</span>
+							<input type='text' style="text-align:center; height:34px; width:100%;" placeholder="No file is selected"  name='textfield' id='textfield<?php echo $key2 ?>' class='txt' /> 
+							
+							<input type="file" name="fileToUpload" class="file" id="fileToUpload<?php echo $key2 ?>" onchange="fileSelected('<?php echo $key2 ?>'); document.getElementById('textfield<?php echo $key2 ?>').value=this.value" >
 							<span class="input-group-btn">
 								<input type="button" class="btn btn-primary" value="Upload" onclick="uploadFile('<?php echo $key2 ?>')">
       						</span>
 						</div>
-						
-						
-
 					</div>
-				</div>
+					
+				</div> 
+
 			<?php endif?>
 		<?php endforeach;?>	
 	<?php endforeach;?>		
